@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 export class ContactForm extends Component {
   state = {
     name: '',
@@ -18,9 +19,9 @@ export class ContactForm extends Component {
   };
 
   handleSubmit = evt => {
+    const { state, props } = this;
     evt.preventDefault();
-    console.log('state from button form submit', this.state);
-    this.props.onSubmit(this.state);
+    props.onSubmit(state);
     this.reset();
   };
 
