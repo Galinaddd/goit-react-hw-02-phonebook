@@ -23,9 +23,20 @@ export class App extends Component {
       number,
       id: nanoid(5),
     };
-    this.setState(prevStaate => ({
-      contacts: [...prevStaate.contacts, newContact],
-    }));
+    const NameNornalized = name.toLowerCase();
+
+    const IsInContacts = this.state.contacts.some(
+      contact => contact.name.toLowerCase() === NameNornalized
+    );
+
+    console.log('IsInContacts', IsInContacts);
+
+    if (IsInContacts) alert(`${name} is olready in contacts`);
+    else
+      this.setState(prevStaate => ({
+        contacts: [...prevStaate.contacts, newContact],
+      }));
+
     console.log('state app after setstate', this.state);
   };
 
@@ -41,14 +52,14 @@ export class App extends Component {
   };
 
   render() {
-    const normalisedFilter = this.state.filter.toLowerCase;
+    const normalisedFilter = this.state.filter.toLowerCase();
 
-    const filtredContacs = this.state.contacts.filter(contact =>
+    const filtredContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalisedFilter)
     );
 
     console.log('filter', this.state.filter);
-    console.log('filtered contacs', filtredContacs);
+    console.log('filtered contacs', filtredContacts);
 
     return (
       <Container>
@@ -58,7 +69,7 @@ export class App extends Component {
         <h2>Contacts</h2>
         {/* <Filter /> */}
         <ContactList
-          contacts={filtredContacs}
+          contacts={filtredContacts}
           onDelete={this.deleteContact}
           filter={this.state.filter}
           onFilterChange={this.changeFilter}
