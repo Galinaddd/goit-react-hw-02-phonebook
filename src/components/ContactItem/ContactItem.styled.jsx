@@ -14,10 +14,12 @@ export const Name = styled.span`
 
 export const Number = styled.span`
   color: #2a2a2a;
+  margin-left: auto;
 `;
 
 export const Button = styled.button`
   color: #2a2a2a;
+  margin-left: 30px;
   :hover {
     color: #ffffff;
     cursor: pointer;

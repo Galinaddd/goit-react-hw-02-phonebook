@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-export const Form = styled.form`
+import { Form, Field } from 'formik';
+export const AddContactForm = styled(Form)`
   width: 200px;
   text-align: left;
   background-color: #f0e2f4;
@@ -13,6 +14,6 @@ export const Label = styled.label`
   margin-bottom: 5px;
 `;
 
-export const Input = styled.input`
+export const Input = styled(Field)`
   display: block;
 `;
