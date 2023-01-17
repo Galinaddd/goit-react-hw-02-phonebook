@@ -1,12 +1,11 @@
 import { ContactItem } from 'components/ContactItem/ContactItem';
-import { Filter } from '../Filter/Filter';
+
 import { List } from './ContactList.styled';
 import PropTypes from 'prop-types';
 
-export const ContactList = ({ contacts, onDelete, filter, onFilterChange }) => {
+export const ContactList = ({ contacts, onDelete }) => {
   return (
     <>
-      <Filter filterValue={filter} onChange={onFilterChange} />
       <List>
         {contacts.map(contact => (
           <ContactItem key={contact.id} info={contact} onDelete={onDelete} />
@@ -15,6 +14,7 @@ export const ContactList = ({ contacts, onDelete, filter, onFilterChange }) => {
     </>
   );
 };
+
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
@@ -23,5 +23,5 @@ ContactList.propTypes = {
       number: PropTypes.string.isRequired,
     })
   ),
-  onFilterChange: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };

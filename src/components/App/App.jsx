@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Container } from './App.styled';
+import { Filter } from '../Filter/Filter';
 import { ContactForm } from 'components/ContactForm/ContactForm';
 import { ContactList } from 'components/ContactList/ContactList';
 import { nanoid } from 'nanoid';
@@ -45,26 +46,46 @@ export class App extends Component {
     this.setState({ filter: evt.currentTarget.value });
   };
 
-  render() {
+  filterContacts = () => {
     const normalisedFilter = this.state.filter.toLowerCase();
 
-    const filtredContacts = this.state.contacts.filter(contact =>
+    return this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalisedFilter)
     );
+  };
 
+  render() {
     return (
       <Container>
         <h1>Phonebook</h1>
         <ContactForm onSubmit={this.addContact} />
-
         <h2>Contacts</h2>
-
-        <ContactList
-          contacts={filtredContacts}
-          onDelete={this.deleteContact}
-          filter={this.state.filter}
-          onFilterChange={this.changeFilter}
-        />
+        {this.filterContacts().length || this.state.filter ? (
+          this.filterContacts().length ? (
+            <>
+              <Filter
+                filterValue={this.state.filter}
+                onChange={this.changeFilter}
+                filter={this.state.filter}
+                onFilterChange={this.changeFilter}
+              />
+              <ContactList
+                contacts={this.filterContacts()}
+                onDelete={this.deleteContact}
+              />
+            </>
+          ) : (
+            <>
+              <Filter
+                filterValue={this.state.filter}
+                onChange={this.changeFilter}
+              />
+              <p>Contact not found</p>
+            </>
+          )
+        ) : (
+          <p>There are no phone numbers in Contacts!</p>
+        )}
       </Container>
     );
   }
