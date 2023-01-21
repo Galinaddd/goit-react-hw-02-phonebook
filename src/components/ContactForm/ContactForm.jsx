@@ -8,26 +8,8 @@ export class ContactForm extends Component {
     onSubmit: PropTypes.func.isRequired,
   };
 
-  state = {
-    name: '',
-    number: '',
-  };
-
-  handleChange = evt => {
-    const { name, value } = evt.currentTarget;
-    this.setState({ [name]: value });
-  };
-
-  reset = () => {
-    this.setState({
-      name: '',
-      number: '',
-    });
-  };
-
   handleSubmit = (values, { resetForm }) => {
     const { props } = this;
-    // evt.preventDefault();
     props.onSubmit(values);
     resetForm();
   };
@@ -36,11 +18,10 @@ export class ContactForm extends Component {
     return (
       <Formik
         initialValues={{
-          name: this.state.name,
-          number: this.state.number,
+          name: '',
+          number: '',
         }}
         onSubmit={this.handleSubmit}
-        // onChange={this.handleChange}
       >
         <AddContactForm>
           <Label>
